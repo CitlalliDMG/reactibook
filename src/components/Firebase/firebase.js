@@ -1,7 +1,6 @@
   import configuration from "../../config";
   import app from "firebase/app";
   import "firebase/auth";
-import { timingSafeEqual } from "crypto";
 
   // Initialize Firebase
   const config = {
