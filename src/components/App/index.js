@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "../Navigation";
@@ -11,6 +11,7 @@ import AdminPage from "../Admin";
 import Page404 from "../Page404";
 
 import * as ROUTES from "../../constants/routes";
+import { withAuthentication } from "../Session";
 
 const App = () => (
   <Router basename={process.env.PUBLIC_URL}>
@@ -33,4 +34,4 @@ const App = () => (
   </Router>
 );
 
-export default App;
+export default withAuthentication(App);
