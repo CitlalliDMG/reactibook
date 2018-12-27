@@ -1,27 +1,31 @@
 import React, { Component } from "react";
 import { withFirebase } from "../Firebase";
 
-// import { firebase } from "../firebase";
-
-// import './PostInput.css'
-
 class PostInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPost: "",
-      username: ""
+      username: "",
+      user: {}
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
+  componentDidMount(){
+    const user = this.props.firebase.auth.currentUser
+    this.setState({user: user});
+  }
+
+  componentWillUnmount(){
+    this.setState({user: {}});
+  }
+
+  handleSubmit = event => {    
     event.preventDefault();
     const postRef = this.props.firebase.posts();
     const post = {
       postText: this.state.currentPost,
-      // user: this.props.user.displayName || this.props.user.email
+      user: this.state.user.displayName|| this.state.user.email
     };
     postRef.push(post);
     this.setState({
@@ -50,7 +54,7 @@ class PostInput extends Component {
             onChange={this.handleChange}
             value={this.state.currentPost}
           />
-          <button disabled={isInvalid}>Publicar</button>
+          <button className="home-button" disabled={isInvalid} type="submit">Publicar</button>
         </form>
       </section>
     );
