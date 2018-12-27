@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { withFirebase } from "../Firebase";
 import { withAuthorization } from "../Session";
@@ -37,7 +37,7 @@ class UsersPage extends Component {
   render() { 
     const { users, loading } = this.state;
     return (
-      <main>
+      <main className="center container col-12 col-md-8">
         <h1>Usuarios de Reactibook</h1>
         {loading && <div>Cargando ...</div>}
 
@@ -48,23 +48,17 @@ class UsersPage extends Component {
 }
 
 const UserList = ({ users }) => (
-  <ul>
+  <Fragment>
     {users.map(user => (
-      <li key={user.uid}>
-        <span>
-          <strong>ID:</strong> {user.uid}
-        </span>
-        <br/>
-        <span>
-          <strong>Email:</strong> {user.email}
-        </span>
-        <br/>
-        <span>
-          <strong>Username:</strong> {user.username}
-        </span>
-      </li>
+      <div className="card" key={user.uid}>
+        <div className="card-body">
+          <h5 className="card-title"><strong>Usuario:</strong> {user.username}</h5>
+          <p className="card-text"><strong>ID:</strong> {user.uid}</p>
+          <p className="card-text"><strong>Email:</strong> {user.email}</p>
+        </div>
+      </div>
     ))}
-  </ul>
+  </Fragment>
 )
 
 const condition = authUser => !!authUser;

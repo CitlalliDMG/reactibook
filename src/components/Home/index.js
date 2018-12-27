@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { withAuthorization } from "../Session";
+import PostInput from "./PostInput";
+import DisplayPost from "./DisplayPost";
 
 const HomePage = () => (
-  <div>
-    <h1>Tu muro</h1>
-    <p>Solo puedes ver esto si estas logueado</p>
-  </div>
+  <main className="home row">
+    <PostInput />
+    <DisplayPost />
+  </main>
 );
 
 const condition = authUser => !!authUser;

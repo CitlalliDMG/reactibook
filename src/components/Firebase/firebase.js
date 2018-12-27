@@ -43,7 +43,9 @@
 
     // POST FUNCTIONS
 
-    postRef = () => this.db.ref("posts");
+    posts = () => this.db.ref("posts");
+
+    post = postId => this.db.ref(`/posts/${postId}`);
     
    }
 

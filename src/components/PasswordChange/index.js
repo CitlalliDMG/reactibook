@@ -36,11 +36,11 @@ class PasswordChangeForm extends Component {
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
 
-    // const isInvalid =
-    //   passwordOne !== passwordTwo || passwordOne === '';
+    const isInvalid =
+      passwordTwo === '' || passwordOne !== passwordTwo;
 
     const passwordValidation =
-      passwordTwo !== "" && passwordOne !== passwordTwo;
+      passwordOne !== passwordTwo;
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -52,6 +52,7 @@ class PasswordChangeForm extends Component {
           placeholder="Ingresa tu contraseña"
           aria-label="Contraseña"
         />
+
         <input
           name="passwordTwo"
           value={passwordTwo}
@@ -61,13 +62,13 @@ class PasswordChangeForm extends Component {
           aria-label="Confirma contraseña"
         />
 
-        {passwordValidation ? <p>Las contraseñas no coindicen</p> : null}
+        {passwordValidation ? <p className="error">Las contraseñas no coindicen</p> : null}
 
-        <button disabled={passwordValidation} type="submit">
+        <button disabled={isInvalid} type="submit">
           Cambiar contraseña
         </button>
 
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
     );
   }

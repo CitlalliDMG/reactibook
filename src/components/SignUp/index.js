@@ -6,10 +6,10 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
+  <main className="center container col-12 col-md-8">
+    <h1>Crea una cuenta</h1>
     <SignUpForm />
-  </div>
+  </main>
 );
 
 const INITIAL_STATE = {
@@ -84,7 +84,8 @@ class SignUpFormBase extends Component {
           aria-label="Nombre Completo"
         />
 
-        {nameValidation ? <p>Ingresa tu nombre completo</p> : null}
+        {nameValidation ? <p className="error">Ingresa tu nombre completo</p> : null}
+        
         <input
           name="email"
           value={email}
@@ -94,7 +95,7 @@ class SignUpFormBase extends Component {
           aria-label="Correo electrónico"
         />
 
-        {/* {emailValidation(email) ? null : <p>Verifica tu dirección de email</p>} */}
+        {/* {emailValidation(email) ? null : <p className="error">Verifica tu dirección de email</p>} */}
 
         <input
           name="passwordOne"
@@ -104,6 +105,7 @@ class SignUpFormBase extends Component {
           placeholder="Ingresa tu contraseña"
           aria-label="Contraseña"
         />
+
         <input
           name="passwordTwo"
           value={passwordTwo}
@@ -113,13 +115,13 @@ class SignUpFormBase extends Component {
           aria-label="Confirma contraseña"
         />
 
-        {passwordValidation ? <p>Las contraseñas no coindicen</p> : null}
+        {passwordValidation ? <p className="error">Las contraseñas no coindicen</p> : null}
 
         <button disabled={isInvalid} type="submit">
           Registrar
         </button>
 
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
     );
   }
@@ -127,7 +129,9 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
   <p>
-    ¿Aún no tienes una cuenta? <Link to={ROUTES.SIGN_UP}>Crea una cuenta</Link>
+    ¿Aún no tienes una cuenta? 
+    <br/>
+    <Link to={ROUTES.SIGN_UP}>Crea una cuenta</Link>
   </p>
 );
 
