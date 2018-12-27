@@ -1,6 +1,7 @@
   import configuration from "../../config";
   import app from "firebase/app";
   import "firebase/auth";
+  import "firebase/database";
 
   // Initialize Firebase
   const config = {
@@ -17,6 +18,7 @@
       app.initializeApp(config);
 
       this.auth = app.auth();
+      this.db = app.database();
     }
 
     // AUTH FUNCTIONS
@@ -32,6 +34,17 @@
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
     doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+
+    // USER FUNCTIONS
+
+    user = uid => this.db.ref(`users/${uid}`);
+
+    users = () => this.db.ref("users");
+
+    // POST FUNCTIONS
+
+    postRef = () => this.db.ref("posts");
+    
    }
 
 export default Firebase;
