@@ -9,7 +9,6 @@ const AccountPage = () => (
     {authUser => (
       <main>
         <h1>Tu cuenta:</h1>
-        <p>Nombre: {authUser.displayName}</p>
         <p>Email: {authUser.email} </p>
         <PasswordForgetForm />
         <PasswordChangeForm />
