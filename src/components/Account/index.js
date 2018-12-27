@@ -9,6 +9,7 @@ const AccountPage = () => (
     {authUser => (
       <main className="center container col-12 col-md-8">
         <h1>Tu cuenta:</h1>
+        <p>Username: {authUser.displayName} </p>
         <p>Email: {authUser.email} </p>
         <p> Recupera tu contraseña:</p>
         <PasswordForgetForm />

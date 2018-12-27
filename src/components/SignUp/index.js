@@ -37,6 +37,9 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         return this.props.firebase.user(authUser.user.uid).set({ username, email, });
       })
+      .then(()=>{
+        this.props.firebase.doUpdateUser(username);
+      })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);

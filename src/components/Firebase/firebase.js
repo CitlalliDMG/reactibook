@@ -35,6 +35,10 @@
 
     doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
+    doUpdateUser = username => this.auth.currentUser.updateProfile({ displayName: username});
+
+    doGetUser = () => this.auth.currentUser;
+
     // USER FUNCTIONS
 
     user = uid => this.db.ref(`users/${uid}`);

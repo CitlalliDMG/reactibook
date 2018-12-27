@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { withFirebase } from "../Firebase";
 
-// import { firebase } from "../firebase";
-
-// import './DisplayPost.css'
-
 class DisplayPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      user: {}
     };
   }
 
-  componentDidMount() {
+  getPosts = () => {
     const postRef = this.props.firebase.posts();
     postRef.on("value", snapshot => {
       let listPosts = snapshot.val();
@@ -29,6 +26,15 @@ class DisplayPost extends Component {
         posts: newState
       });
     });
+  };
+
+  componentDidMount() {
+    this.setState({ user: this.props.firebase.auth.currentUser });
+    this.getPosts();
+  }
+
+  componentWillUnmount() {
+    this.setState({ user: {} });
   }
 
   removePost(postId) {
@@ -37,32 +43,40 @@ class DisplayPost extends Component {
   }
 
   editePost(postId) {
-    console.log('Voy a editar el post con el ID: ' + postId);
+    console.log("Voy a editar el post con el ID: " + postId);
   }
 
   render() {
     return (
-      <section className="col-8 offset-2 col-md-6 offset-md-0">
+      <section className="col-10 offset-1 col-md-6 offset-md-0">
         <div className="display-posts">
           <ul>
             {this.state.posts
               .map(post => {
+                // console.log(post);
+
                 return (
                   <li key={post.id}>
-                    <p className="text-color">{post.user}</p>
+                    <p className="text-color">Publicado por: {post.user}</p>
                     <p className="bolder">{post.postText}</p>
-                    <hr/>
-                    {/* {post.user === (this.props.user.displayName ||
-                    this.props.user.email) ? ( */}
+                    <hr />
+                    {post.user ===
+                    (this.state.user.displayName || this.state.user.email) ? (
                       <div className="row">
-                        <button className="button-post" onClick={() => this.editePost(post.id)}>
+                        <button
+                          className="button-post"
+                          onClick={() => this.editePost(post.id)}
+                        >
                           Editar
                         </button>
-                        <button className="button-post" onClick={() => this.removePost(post.id)}>
+                        <button
+                          className="button-post"
+                          onClick={() => this.removePost(post.id)}
+                        >
                           Eliminar
                         </button>
                       </div>
-                    {/* ) : null } */}
+                    ) : null}
                   </li>
                 );
               })
