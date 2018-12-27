@@ -8,7 +8,7 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const SignInPage = () => (
-  <main>
+  <main className="center container col-12 col-md-8">
     <h1>Inicia sesión</h1>
     <SignInForm />
     <PasswordForgetLink />
@@ -71,7 +71,7 @@ class SignInFormBase extends Component {
           aria-label="Contraseña"
         />
         <button disabled={isInvalid} type="submit">Entrar</button>
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
     );
   }

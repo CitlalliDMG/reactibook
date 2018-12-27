@@ -5,9 +5,9 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const PasswordForgetPage = () => (
-  <main>
+  <main className="center container col-12 col-md-8">
     <h1>Recupera tu contraseña</h1>
-    <p>Llena este formulario para recibir en tu correo instrucciones para recuperarla</p>
+    <p>Ingresa tu correo para recibir instrucciones</p>
     <PasswordForgetForm />
   </main>
 );
@@ -57,7 +57,7 @@ class PasswordForgetFormBase extends Component {
           aria-label="Correo electrónico"
         />
         <button disabled={isInvalid} type="submit">Recuperar</button>
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
     );
   }
