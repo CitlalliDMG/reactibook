@@ -52,9 +52,8 @@ const UserList = ({ users }) => (
     {users.map(user => (
       <div className="card" key={user.uid}>
         <div className="card-body">
-          <h5 className="card-title"><strong>Usuario:</strong> {user.username}</h5>
-          <p className="card-text"><strong>ID:</strong> {user.uid}</p>
-          <p className="card-text"><strong>Email:</strong> {user.email}</p>
+          <h5 className="card-title">{user.username}</h5>
+          <p className="card-text">{user.email}</p>
         </div>
       </div>
     ))}

@@ -12,7 +12,8 @@
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "sweetalert2": "^7.33.1"
   },
   "scripts": {
     "start": "react-scripts start",

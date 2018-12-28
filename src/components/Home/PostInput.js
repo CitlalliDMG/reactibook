@@ -7,32 +7,35 @@ class PostInput extends Component {
     this.state = {
       currentPost: "",
       username: "",
-      user: {}
+      user: {},
+      shareOption: 'Selecciona'
     };
   }
 
-  componentDidMount(){
-    const user = this.props.firebase.auth.currentUser
-    this.setState({user: user});
+  componentDidMount() {
+    const user = this.props.firebase.auth.currentUser;
+    this.setState({ user: user });
   }
 
-  componentWillUnmount(){
-    this.setState({user: {}});
+  componentWillUnmount() {
+    this.setState({ user: {} });
   }
 
-  handleSubmit = event => {    
+  handleSubmit = event => {
     event.preventDefault();
     const postRef = this.props.firebase.posts();
     const post = {
       postText: this.state.currentPost,
-      user: this.state.user.displayName|| this.state.user.email
+      user: this.state.user.displayName || this.state.user.email,
+      shareWith: this.state.shareOption
     };
     postRef.push(post);
     this.setState({
       currentPost: "",
-      username: ""
+      username: "",
+      shareOption: 'Selecciona'
     });
-  }
+  };
 
   handleChange = event => {
     this.setState({
@@ -41,12 +44,12 @@ class PostInput extends Component {
   };
 
   render() {
-    const isInvalid = this.state.currentPost.trim() === '';
+    const isInvalid = this.state.currentPost.trim() === "" || this.state.shareOption === "Selecciona";
 
     return (
-      <section className="col-8 offset-2 col-md-4 offset-md-1 justify-content-around post-entry">
+      <section className="col-10 offset-1 col-md-4 offset-md-1 post-entry">
         <form onSubmit={this.handleSubmit}>
-          <h3>¿Qué está pasando?</h3>
+          <h3 className="mt-3 mt-md-0 ">¿Qué está pasando?</h3>
           <textarea
             type="text"
             name="currentPost"
@@ -54,7 +57,16 @@ class PostInput extends Component {
             onChange={this.handleChange}
             value={this.state.currentPost}
           />
-          <button className="home-button" disabled={isInvalid} type="submit">Publicar</button>
+          <div className="row-post mb-3 mb-md-0">
+            <select className="select-post" name="shareOption" value={this.state.shareOption} onChange={this.handleChange}>
+              <option value="Selecciona">Compartir con...</option>
+              <option value="Público">Público</option>
+              <option value="Amigos">Amigos</option>
+            </select>
+            <button className="home-button" disabled={isInvalid} type="submit">
+              Publicar
+            </button>
+          </div>
         </form>
       </section>
     );

@@ -36,12 +36,12 @@ const NavigationAuth = () => (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link to={ROUTES.HOME} className="nav-link">
-            Inicio
+            Publicaciones
           </Link>
         </li>
         <li className="nav-item">
           <Link to={ROUTES.ACCOUNT} className="nav-link">
-            Mi cuenta
+            Tu cuenta
           </Link>
         </li>
         <li className="nav-item">
