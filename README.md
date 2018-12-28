@@ -1,68 +1,86 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Reactibook
 
-## Available Scripts
+Project to build a web app that emulates the basic functioning of a social network, allowing the user to register, log in, publish and view the publications of others in its timeline
 
-In the project directory, you can run:
+Try the demo [here](https://citlallidmg.github.io/reactibook/)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Registration of a new user with email and password
+- Login for registered users
+- Password recovery
+- Change of password
+- Publication of new text entries
+- Selector to choose with whom to share the publication
+- View own entries and other users
+- Elimination of own entries
+- Data permanence
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Stack
 
-### `npm test`
+- Create React App
+- React Context API
+- SweetAlert
+- Bootstrap
+- Firebase Authentication
+- Firebase Realtime Database
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Hosting
 
-### `npm run build`
+- [gh-pages](https://github.com/gitname/react-gh-pages)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Quick Start
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Clone and run the repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```shell
+$ git clone https://github.com/CitlalliDMG/reactibook.git
+$ cd reactibook
+$ npm install
+$ npm start
+```
 
-### `npm run eject`
+Also you will need to create your own project on Firebase to get your own project configuration.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```javascript
+// src/config.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const configuration = {
+  apiKeyFirebase: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOU_MESSAGING_SENDER_ID"
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export default configuration;
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Deploying to GitHub Pages
 
-## Learn More
+Configure this app with your project-specific details:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```json
+// package.json
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+{
+  "homepage": "https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME",
+  // ....
+  "scripts": {
+    // ....
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
+```
 
-### Code Splitting
+Build and deploy the app:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```shell
+$ npm run deploy
+```
 
-### Analyzing the Bundle Size
+## Author
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Developed by [Citlalli Del Moral](https://github.com/CitlalliDMG)
