@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withFirebase } from "../Firebase";
+import swal from 'sweetalert2';
 
 class DisplayPost extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class DisplayPost extends Component {
         newState.push({
           id: post,
           postText: listPosts[post].postText,
-          user: listPosts[post].user
+          user: listPosts[post].user,
+          shareWith: listPosts[post].shareWith
         });
       }
       this.setState({
@@ -38,8 +40,27 @@ class DisplayPost extends Component {
   }
 
   removePost(postId) {
-    const postRef = this.props.firebase.post(postId);
-    postRef.remove();
+    swal({
+      title: '¿Quieres borrar esta publicación?',
+      text: "(Esta acción no se puede revertir)",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#20232a',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result)=> {
+      if (result.value) {
+        const postRef = this.props.firebase.post(postId);
+        postRef.remove();
+        swal({
+          title: "¡Listo!",
+          text: "La publicación ha sido borrada'",
+          type: "success",
+          confirmButtonColor: '#61dafb'
+        })
+      }
+    })
   }
 
   editePost(postId) {
@@ -53,11 +74,10 @@ class DisplayPost extends Component {
           <ul>
             {this.state.posts
               .map(post => {
-                // console.log(post);
-
                 return (
                   <li key={post.id}>
-                    <p className="text-color">Publicado por: {post.user}</p>
+                    <p className="post-info"><span className="text-color">Publicado por:</span> {post.user}</p>
+                    <p><span className="text-color">Compartido con:</span> {post.shareWith}</p>
                     <p className="bolder">{post.postText}</p>
                     <hr />
                     {post.user ===

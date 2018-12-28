@@ -8,12 +8,18 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <main className="center container col-12 col-md-8">
-        <h1>Tu cuenta:</h1>
-        <p>Username: {authUser.displayName} </p>
-        <p>Email: {authUser.email} </p>
-        <p> Recupera tu contraseña:</p>
+        <h1 className="mt">Tu cuenta:</h1>
+        <section className="account-container">
+          <p>
+            <span className="bolder">Usuario:</span> {authUser.displayName}{" "}
+          </p>
+          <p className="info">
+            <span className="bolder">Correo:</span> {authUser.email}{" "}
+          </p>
+        </section>
+        <p className="bolder"> Recupera tu contraseña:</p>
         <PasswordForgetForm />
-        <p>O cambia tu contraseña:</p>
+        <p className="bolder">O cambia tu contraseña:</p>
         <PasswordChangeForm />
       </main>
     )}
